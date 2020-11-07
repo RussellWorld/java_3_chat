@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Server {
-    private List<ClientHandler> clients;
-    private AuthService authService;
+    private final List<ClientHandler> clients;
+    private final AuthService authService;
 
     public Server() {
         clients = new CopyOnWriteArrayList<>();
@@ -38,6 +38,7 @@ public class Server {
         } finally {
             SQLHandler.disconnect();
             try {
+                assert socket != null;
                 socket.close();
             } catch (IOException e) {
                 e.printStackTrace();

@@ -1,10 +1,13 @@
 package server;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SimpleAuthService implements AuthService {
-    private class UserData {
+    public SimpleAuthService(List<UserData> users) {
+        this.users = users;
+    }
+
+    private static class UserData {
         String login;
         String password;
         String nickname;
@@ -16,17 +19,7 @@ public class SimpleAuthService implements AuthService {
         }
     }
 
-    private List<UserData> users;
-
-    public SimpleAuthService() {
-        users = new ArrayList<>();
-        users.add(new UserData("qwe", "qwe", "qwe"));
-        users.add(new UserData("asd", "asd", "asd"));
-        users.add(new UserData("zxc", "zxc", "zxc"));
-        for (int i = 1; i < 10; i++) {
-            users.add(new UserData("login" + i, "pass" + i, "nick" + i));
-        }
-    }
+    private final List<UserData> users;
 
     @Override
     public String getNicknameByLoginAndPassword(String login, String password) {
